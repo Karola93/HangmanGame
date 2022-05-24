@@ -74,7 +74,7 @@ main {
     flex-flow: row wrap;
 }
 
-.letter-button{
+.letterButton{
     width: 40px;
     height: 40px;
     font-size: 15pt;
@@ -85,7 +85,7 @@ main {
     background-color: #1a1a1a;
 }
 
-.clue-button {
+.clueButton {
     width: 70px;
     height: 70px;
     font-size: 15pt;

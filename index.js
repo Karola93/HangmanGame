@@ -1,6 +1,6 @@
 const getClue = document.getElementById('clue');
 const clue = document.getElementsByClassName('clue')[0];
-const letterBtns = document.getElementsByClassName('letter-button');
+const letterBtns = document.getElementsByClassName('letterButton');
 const mistakes = document.getElementsByClassName("mistakes")[0];
 const image = document.getElementsByClassName('image')[0];
 
@@ -80,7 +80,7 @@ const createAlphabetUi = () => {
     const myButtons = document.getElementsByClassName('buttons');
     for (const letter of alphabet) {
         const p= document.createElement('p');
-        p.innerHTML = `<button class="letter-button btn btn-default L"> ${letter.toUpperCase()} </button>`
+        p.innerHTML = `<button class="letterButton btn btn-default L"> ${letter.toUpperCase()} </button>`
         myButtons[0].appendChild(p);
     }
 }
