@@ -4,6 +4,7 @@ const letterBtns = document.getElementsByClassName('letterButton');
 const mistakes = document.getElementsByClassName("mistakes")[0];
 const image = document.getElementsByClassName('image')[0];
 const playAgainBtn = document.getElementById('reset');
+const upperCase = document.querySelector('.upperCase');
 
 const kindsOfSports = ['Archery', 'Bowling', 'Climbing', 'Curling', 'Gymnastics'];
 let answer = '';
@@ -16,11 +17,12 @@ const bowlingClue = 'Strike';
 const climbingClue = 'Mountains on summer';
 const curlingClue = 'Rectangular ice sheet';
 const gymnasticsClue = ' Balance, strength, flexibility';
-const answerAr = answer.toUpperCase().split('');
+
 
 const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
         'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's',
         't', 'u', 'v', 'w', 'x', 'y', 'z'];
+
 
 const randomWord = () => {
     answer = kindsOfSports[Math.floor(Math.random() * kindsOfSports.length)];
@@ -87,8 +89,8 @@ const createAlphabetUi = () => {
 }
 
 const toUpperCase = () =>{
-    const upperCase = document.querySelector('.upperCase').innerText.toUpperCase();
-    const upper = document.querySelector('.upperCase').innerHTML=`<strong> ${upperCase} </strong>` ;
+    const upper = upperCase.innerText.toUpperCase();
+    upperCase.innerHTML = `<strong> ${upper} </strong>`;
 };
 
 const reset = () => {
@@ -96,7 +98,6 @@ const reset = () => {
         image.innerHTML = `<img src=./images/letsgo.png alt="Hang Man Image">`;
         mistakes.innerText = '0';
         guessWord();
-
     })
 }
 
