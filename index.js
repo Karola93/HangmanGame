@@ -9,7 +9,7 @@ const kindsOfSports = ['Archery', 'Bowling', 'Climbing', 'Curling', 'Gymnastics'
 let answer = '';
 let maxWrong = 10;
 let wrongAnswers = 0;
-let guess= [];
+let guess = [];
 let wordStatus = null;
 const archeryClue = 'Legolas';
 const bowlingClue = 'Strike';
@@ -54,7 +54,7 @@ const answerFunction = () => {
     for (const btn of letterBtns) {
         btn.addEventListener('click', () => {
             if (answer.toUpperCase().split('').includes(btn.innerText)) {
-                wordStatus= answerAr.map(letter => letter === btn.innerText ? letter : letter.replace(letter,`</p>_</p>`) ).join('');
+                wordStatus= answer.toUpperCase().split('').map(letter => letter === btn.innerText ? letter : letter.replace(letter,`</p>_</p>`) ).join('');
                 document.getElementsByClassName('word')[0].innerHTML = wordStatus;
             } else {
                 wrongAnswers += 1;
@@ -89,8 +89,8 @@ const createAlphabetUi = () => {
 }
 
 const toUpperCase = () =>{
-    const upperCase= document.querySelector('.upperCase').innerText.toUpperCase();
-    const upper= document.querySelector('.upperCase').innerHTML=`<strong> ${upperCase} </strong>` ;
+    const upperCase = document.querySelector('.upperCase').innerText.toUpperCase();
+    const upper = document.querySelector('.upperCase').innerHTML=`<strong> ${upperCase} </strong>` ;
 };
 
 randomWord();
