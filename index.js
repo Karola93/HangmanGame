@@ -1,7 +1,6 @@
 const getClue = document.getElementById('clue');
 const clue = document.getElementsByClassName('clue')[0];
 const letterBtns = document.getElementsByClassName('letter-button');
-// let showWord = document.getElementsByClassName('word')[0];
 const mistakes = document.getElementsByClassName("mistakes")[0];
 const image = document.getElementsByClassName('image')[0];
 
@@ -21,7 +20,6 @@ const answerAr = answer.toUpperCase().split('');
 const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
         'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's',
         't', 'u', 'v', 'w', 'x', 'y', 'z'];
-
 
 const randomWord = () => {
     answer = kindsOfSports[Math.floor(Math.random() * kindsOfSports.length)];
@@ -77,7 +75,6 @@ const guessWord = () => {
     wordStatus = answer.toUpperCase().split('').map(letter => letter.replace(letter,`</p>_</p>`) ).join('');
     document.getElementsByClassName('word')[0].innerHTML = wordStatus;
 }
-
 
 const createAlphabetUi = () => {
     const myButtons = document.getElementsByClassName('buttons');
