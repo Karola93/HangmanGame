@@ -3,6 +3,7 @@ const clue = document.getElementsByClassName('clue')[0];
 const letterBtns = document.getElementsByClassName('letterButton');
 const mistakes = document.getElementsByClassName("mistakes")[0];
 const image = document.getElementsByClassName('image')[0];
+const playAgainBtn = document.getElementById('reset');
 
 const kindsOfSports = ['Archery', 'Bowling', 'Climbing', 'Curling', 'Gymnastics'];
 let answer = '';
@@ -90,10 +91,20 @@ const toUpperCase = () =>{
     const upper = document.querySelector('.upperCase').innerHTML=`<strong> ${upperCase} </strong>` ;
 };
 
+const reset = () => {
+    playAgainBtn.addEventListener('click', () => {
+        image.innerHTML = `<img src=./images/letsgo.png alt="Hang Man Image">`;
+        mistakes.innerText = '0';
+        guessWord();
+
+    })
+}
+
 randomWord();
 guessWord();
 createAlphabetUi();
 answerFunction();
 toUpperCase();
+reset();
 
 
