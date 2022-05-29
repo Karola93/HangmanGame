@@ -6,17 +6,16 @@ const image = document.getElementsByClassName('image')[0];
 const playAgainBtn = document.getElementById('reset');
 const upperCase = document.querySelector('.upperCase');
 
-const kindsOfSports = ['Archery', 'Bowling', 'Climbing', 'Curling', 'Gymnastics'];
+const kindsOfSports = ['Aerobics', 'Bowling', 'Climbing', 'Curling', 'Snorkeling'];
 let answer = '';
 let maxWrong = 10;
 let wrongAnswers = 0;
-let guess = [];
-let wordStatus = null;
-const archeryClue = 'Legolas';
+let wordStatusFirst= null;
+const aerobicsClue = 'Gym and music';
 const bowlingClue = 'Strike';
 const climbingClue = 'Mountains on summer';
 const curlingClue = 'Rectangular ice sheet';
-const gymnasticsClue = ' Balance, strength, flexibility';
+const snorkelingClue = 'Underwater';
 
 
 const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
@@ -29,10 +28,10 @@ const randomWord = () => {
 }
 
 const answerFunction = () => {
-    answer = kindsOfSports[Math.floor(Math.random() * kindsOfSports.length)];
+    randomWord();
     if (answer === kindsOfSports[0]) {
         getClue.addEventListener('click', () => {
-            clue.innerHTML = archeryClue;
+            clue.innerHTML = aerobicsClue;
         })
     } else if (answer === kindsOfSports[1]) {
         getClue.addEventListener('click', () => {
@@ -48,35 +47,47 @@ const answerFunction = () => {
         })
     } else if (answer === kindsOfSports[4]) {
         getClue.addEventListener('click', () => {
-            clue.innerHTML = gymnasticsClue;
+            clue.innerHTML = snorkelingClue;
         });
     }
+    const wordArr= answer.toUpperCase().split('')
+    const answerArr= wordArr.map(letter => letter.replace(letter,`_`) ).join('')
+    const emptyArr= answerArr.split('');
+    const Answer = Array(wordArr.length);
 
-    for (const btn of letterBtns) {
-        btn.addEventListener('click', () => {
-            if (answer.toUpperCase().split('').includes(btn.innerText)) {
-                wordStatus= answer.toUpperCase().split('').map(letter => letter === btn.innerText ? letter : letter.replace(letter,`</p>_</p>`) ).join('');
-                document.getElementsByClassName('word')[0].innerHTML = wordStatus;
-            } else {
-                wrongAnswers += 1;
-                let numberToString= wrongAnswers.toString();
-                if (wrongAnswers <= 10) {
-                    mistakes.innerText = numberToString;
-                    image.innerHTML = `<img src=./images/${numberToString}.png alt="Hang Man Image">`
-                } else {
-                    mistakes.innerText = '10';
-                    image.innerHTML = `<img src=./images/over.png alt="Hang Man Image">`
+        for (const btn of letterBtns) {
+            btn.addEventListener('click', () => {
+                for (let i = 0; i < Answer.length; i++) {
+                    if (wordArr[i] === btn.innerText) {
+                        emptyArr[wordArr.indexOf(btn.innerText)] = btn.innerText;
+                        document.getElementsByClassName('word')[0].innerHTML = emptyArr.map(l => l.replace(l, `<p>${l}</p>`)).join('');
+                    }
                 }
-            }
-        } );
-    }
+                if (!wordArr.includes(btn.innerText)) {
+                    wrongAnswers += 1;
+                    let numberToString = wrongAnswers.toString();
+                    if (wrongAnswers <= 10) {
+                        mistakes.innerText = numberToString;
+                        image.innerHTML = `<img src=./images/${numberToString}.png alt="Hang Man Image">`;
+                    } else {
+                        mistakes.innerText = '10';
+                        image.innerHTML = `<img src=./images/over.png alt="Hang Man Image">`;
+                    }
+                }
+                if (!document.getElementsByClassName('word')[0].innerHTML.split('').includes(`_`)){
+                    image.innerHTML = `<img src=./images/over.png alt="Hang Man Image">`;
+                }
+            })
+        }
+
 }
+
 
 document.getElementsByClassName("maxWrong")[0].innerText = maxWrong;
 
 const guessWord = () => {
-    wordStatus = answer.toUpperCase().split('').map(letter => letter.replace(letter,`</p>_</p>`) ).join('');
-    document.getElementsByClassName('word')[0].innerHTML = wordStatus;
+    wordStatusFirst = answer.toUpperCase().split('').map(letter => letter.replace(letter,`<p>_</p>`) ).join('');
+    document.getElementsByClassName('word')[0].innerHTML = wordStatusFirst;
 }
 
 const createAlphabetUi = () => {
