@@ -6,16 +6,16 @@ const image = document.getElementsByClassName('image')[0];
 const playAgainBtn = document.getElementById('reset');
 const upperCase = document.querySelector('.upperCase');
 
-const kindsOfSports = ['Aerobics', 'Bowling', 'Climbing', 'Curling', 'Snorkeling'];
+const kindsOfSports = ['Aerobics', 'Bowling', 'Rowing', 'Curling', 'Wrestling'];
 let answer = '';
 let maxWrong = 10;
 let wrongAnswers = 0;
 let wordStatusFirst= null;
 const aerobicsClue = 'Gym and music';
 const bowlingClue = 'Strike';
-const climbingClue = 'Mountains on summer';
+const rowingClue = 'Race on river';
 const curlingClue = 'Rectangular ice sheet';
-const snorkelingClue = 'Underwater';
+const wrestlingClue = 'Grabs and throws';
 
 const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
         'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's',
@@ -26,7 +26,6 @@ const randomWord = () => {
 }
 
 const answerFunction = () => {
-    randomWord();
     if (answer === kindsOfSports[0]) {
         getClue.addEventListener('click', () => {
             clue.innerHTML = aerobicsClue;
@@ -37,7 +36,7 @@ const answerFunction = () => {
         })
     } else if (answer === kindsOfSports[2]) {
         getClue.addEventListener('click', () => {
-            clue.innerHTML = climbingClue;
+            clue.innerHTML = rowingClue;
         })
     } else if (answer === kindsOfSports[3]) {
         getClue.addEventListener('click', () => {
@@ -45,17 +44,17 @@ const answerFunction = () => {
         })
     } else if (answer === kindsOfSports[4]) {
         getClue.addEventListener('click', () => {
-            clue.innerHTML = snorkelingClue;
+            clue.innerHTML = wrestlingClue;
         });
     }
-    const wordArr= answer.toUpperCase().split('')
-    const answerArr= wordArr.map(letter => letter.replace(letter,`_`) ).join('')
+    const wordArr= answer.toUpperCase().split('');
+    const answerArr= wordArr.map(letter => letter.replace(letter,`_`) ).join('');
     const emptyArr= answerArr.split('');
-    const Answer = Array(wordArr.length);
+    const newAnswer = Array(wordArr.length);
 
         for (const btn of letterBtns) {
             btn.addEventListener('click', () => {
-                for (let i = 0; i < Answer.length; i++) {
+                for (let i = 0; i < newAnswer.length; i++) {
                     if (wordArr[i] === btn.innerText) {
                         emptyArr[wordArr.indexOf(btn.innerText)] = btn.innerText;
                         document.getElementsByClassName('word')[0].innerHTML = emptyArr.map(l => l.replace(l, `<p>${l}</p>`)).join('');
@@ -69,17 +68,16 @@ const answerFunction = () => {
                         image.innerHTML = `<img src=./images/${numberToString}.png alt="Hang Man Image">`;
                     } else {
                         mistakes.innerText = '10';
-                        image.innerHTML = `<img src=./images/over.png alt="Hang Man Image">`;
+                        image.innerHTML = `<img src=./images/over.png alt="Game over">`;
                     }
                 }
                 if (!document.getElementsByClassName('word')[0].innerHTML.split('').includes(`_`)){
-                    image.innerHTML = `<img src=./images/over.png alt="Hang Man Image">`;
+                    image.innerHTML = `<img src=./images/winner.png alt="Winner">`;
                 }
             })
         }
 
 }
-
 
 document.getElementsByClassName("maxWrong")[0].innerText = maxWrong;
 
@@ -91,7 +89,7 @@ const guessWord = () => {
 const createAlphabetUi = () => {
     const myButtons = document.getElementsByClassName('buttons');
     for (const letter of alphabet) {
-        const p= document.createElement('p');
+        const p = document.createElement('p');
         p.innerHTML = `<button class="letterButton btn btn-default L"> ${letter.toUpperCase()} </button>`
         myButtons[0].appendChild(p);
     }
@@ -104,7 +102,7 @@ const toUpperCase = () =>{
 
 const reset = () => {
     playAgainBtn.addEventListener('click', () => {
-        image.innerHTML = `<img src=./images/letsgo.png alt="Hang Man Image">`;
+        image.innerHTML = `<img src=./images/letsgo.png alt="Start the game">`;
         mistakes.innerText = '0';
         guessWord();
     })
